@@ -36,4 +36,4 @@ RUN mkdir -p output
 
 EXPOSE ${MODEL_SERVICE_PORT}
 
-CMD ["sh", "-c", "python src/serve_model.py --port $MODEL_SERVICE_PORT"]
+CMD ["python", "src/serve_model.py"]
