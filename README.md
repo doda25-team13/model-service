@@ -60,5 +60,22 @@ Once its startup has finished, you can either access [localhost:8081/apidocs](ht
       "sms": "test ..."
     }
 
+### Running Backend using its Docker Image
 
 
+After training the model, the backend microservice can be started:
+First, build the image:
+
+```bash
+cd /path/to/model-service/project
+docker build -t model-service:latest .
+```
+
+Then run it:
+
+```bash
+docker run -it --rm \
+  -p 8081:8081 \
+  -v $(pwd):/app \
+  model-service:latest
+```
