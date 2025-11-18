@@ -1,7 +1,9 @@
+FROM python:3.12.9-slim AS base
+
 ############################
 # STAGE 1: Builder stage
 
-FROM python:3.12.9-slim AS builder
+FROM base AS builder
 
 # as stated in F6
 ENV MODEL_SERVICE_PORT=8081
@@ -22,7 +24,7 @@ COPY . .
 ############################
 # STAGE 2: Runtime stage
 
-FROM python:3.12.9-slim 
+FROM base
 
 ENV MODEL_SERVICE_PORT=8081
 
