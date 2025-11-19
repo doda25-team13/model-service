@@ -17,7 +17,7 @@ swagger = Swagger(app)
 # Configuration from the environment variables
 MODEL_DIR = os.getenv('MODEL_DIR', '/models')
 MODEL_VERSION = os.getenv('MODEL_VERSION', 'latest')
-MODEL_REPO = os.getenv('MODEL_REPO', 'doda25-team18/model-service')
+MODEL_REPO = os.getenv('MODEL_REPO', 'doda25-team13/model-service')
 
 def download_model_if_needed():
     """Download model from GitHub releases if not present locally."""
