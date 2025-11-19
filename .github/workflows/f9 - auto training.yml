@@ -1,0 +1,52 @@
+name: F9 - Train and Release Model
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Model version (e.g., 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  train-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12.9'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Download and prepare data
+        run: |
+          mkdir -p output
+          python src/get_data.py
+      
+      - name: Train model
+        run: |
+          python src/text_preprocessing.py
+          python src/text_classification.py
+      
+      - name: Package model artifacts
+        run: |
+          mkdir -p release-artifacts
+          cp output/model.joblib release-artifacts/
+          cp output/preprocessor.joblib release-artifacts/
+          tar -czf model-v${{ inputs.version }}.tar.gz -C release-artifacts .
+      
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create v${{ inputs.version }} \
+            --title "Model v${{ inputs.version }}" \
+            --notes "Trained model version ${{ inputs.version }}" \
+            model-v${{ inputs.version }}.tar.gz
