@@ -1,11 +1,6 @@
 name: F9 - Train and Release Model
 
 on:
-  push:
-    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
-  pull_request:
-    branches: [ "main" ]
-  
   # manual trigger 
   workflow_dispatch:
     inputs:
