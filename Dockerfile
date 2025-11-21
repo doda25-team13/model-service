@@ -25,14 +25,17 @@ RUN pip install --prefix=/install --no-cache-dir -r requirements.txt
 FROM base
 
 ENV MODEL_SERVICE_PORT=8081
-
+ENV MODEL_DIR=/models
+ENV MODEL_VERSION=latest
+ENV MODEL_REPO=doda25-team13/model-service
+    
 WORKDIR /app
 
 COPY --from=builder /install /usr/local
 
-COPY . .
+COPY src/ ./src/
 
-RUN mkdir -p output
+RUN mkdir -p /models
 
 EXPOSE ${MODEL_SERVICE_PORT}
 
