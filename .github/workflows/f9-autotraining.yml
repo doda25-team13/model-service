@@ -32,7 +32,7 @@ jobs:
       - name: Download and prepare data
         run: |
           mkdir -p output
-          python src/get_data.py
+          python src/read_data.py
       
       - name: Train model
         run: |
