@@ -41,10 +41,10 @@ jobs:
       
       - name: Package model artifacts
         run: |
-          mkdir -p release-artifacts
-          cp output/model.joblib release-artifacts/
-          cp output/preprocessor.joblib release-artifacts/
-          tar -czf model-v${{ inputs.version }}.tar.gz -C release-artifacts .
+          tar -czf model-v${{ inputs.version }}.tar.gz \
+          output/model.joblib \
+          output/preprocessor.joblib
+
       
       - name: Create GitHub Release
         env:
