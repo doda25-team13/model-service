@@ -34,10 +34,14 @@ jobs:
           mkdir -p output
           python src/read_data.py
       
+      - name: Run text preprocessing
+        run: |
+          PYTHONPATH=./src python -m text_preprocessing
+
       - name: Train model
         run: |
-          python src/text_preprocessing.py
-          python src/text_classification.py
+          PYTHONPATH=./src python -m text_classification
+
       
       - name: Package model artifacts
         run: |
