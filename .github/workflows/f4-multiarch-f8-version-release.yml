@@ -14,7 +14,7 @@ jobs:
 
       - name: Set lowercase image name
         run: |
-          IMG="ghcr.io/${{ github.repository }}"   # ghcr.io/doda25-team13/app
+          IMG="ghcr.io/${{ github.repository }}"   # ghcr.io/doda25-team13/model-service
           echo "image_name=${IMG@L}" >> $GITHUB_ENV
 
       - name: Set up QEMU (for multi-arch)
@@ -41,7 +41,7 @@ jobs:
           echo "version_minor=$MINOR" >> $GITHUB_ENV
           echo "version_patch=$PATCH" >> $GITHUB_ENV
           
-      - name: Build and push app (multi-arch)
+      - name: Build and push model-service (multi-arch)
         uses: docker/build-push-action@v5
         with:
           context: .
